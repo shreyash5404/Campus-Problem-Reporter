@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Helper Management</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:linear-gradient(135deg,#0ea5a4,#1e293b);
+    min-height:100vh;
+    padding:30px;
+    color:#333;
+}
+
+/* HEADER */
+.header{
+    color:white;
+    margin-bottom:20px;
+}
+
+.header h1{
+    font-size:26px;
+}
+
+/* GRID */
+#helpers{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+    gap:20px;
+}
+
+/* CARD */
+.card{
+    background:white;
+    border-radius:14px;
+    padding:20px;
+    box-shadow:0 8px 25px rgba(0,0,0,0.15);
+    transition:0.3s;
+}
+
+.card:hover{
+    transform:translateY(-5px);
+}
+
+/* NAME */
+.name{
+    font-size:18px;
+    font-weight:600;
+    margin-bottom:8px;
+}
+
+/* INFO */
+.info{
+    font-size:13px;
+    color:#64748b;
+    margin-bottom:10px;
+}
+
+/* STATUS */
+.status{
+    display:inline-block;
+    padding:5px 10px;
+    border-radius:20px;
+    font-size:12px;
+    margin-bottom:10px;
+}
+
+.available{
+    background:#dcfce7;
+    color:#16a34a;
+}
+
+.allotted{
+    background:#fee2e2;
+    color:#dc2626;
+}
+
+/* BUTTONS */
+.btn{
+    padding:8px 12px;
+    border:none;
+    border-radius:6px;
+    cursor:pointer;
+    font-size:12px;
+    margin-right:6px;
+}
+
+.toggle-btn{
+    background:#0ea5a4;
+    color:white;
+}
+
+.mail-btn{
+    background:#1e293b;
+    color:white;
+}
+
+.remove-btn{
+    background:#ef4444;
+    color:white;
+}
+
+/* FLOAT BUTTON */
+#addBtn{
+    position:fixed;
+    bottom:25px;
+    right:25px;
+    width:60px;
+    height:60px;
+    font-size:28px;
+    border-radius:50%;
+    background:#0ea5a4;
+    color:white;
+    border:none;
+    cursor:pointer;
+}
+
+/* POPUP */
+.popup{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.6);
+    display:none;
+    justify-content:center;
+    align-items:center;
+}
+
+.popup-box{
+    background:white;
+    padding:25px;
+    border-radius:12px;
+    width:300px;
+}
+
+.popup-box h3{
+    margin-bottom:15px;
+}
+
+.popup-box input{
+    width:100%;
+    padding:10px;
+    margin-bottom:10px;
+    border:1px solid #ddd;
+    border-radius:6px;
+}
+
+.popup-box button{
+    width:100%;
+    padding:10px;
+    background:#0ea5a4;
+    color:white;
+    border:none;
+    border-radius:6px;
+    margin-top:5px;
+}
+
+/* BACK BUTTON */
+.back-btn{
+    background:#64748b !important;
+}
+</style>
+
+</head>
+<body>
+
+<div class="header">
+    <h1>Helper Management</h1>
+</div>
+
+<div id="helpers"></div>
+
+<button id="addBtn" onclick="openForm()">+</button>
+
+<!-- POPUP -->
+<div class="popup" id="popup">
+    <div class="popup-box">
+        <h3>Add Helper</h3>
+
+        <input id="name" placeholder="Helper Name" type="text">
+        <input id="hid" placeholder="Helper ID" type="number">
+        <input type="email" id="email" placeholder="Email">
+
+        <button onclick="saveHelper()">Save</button>
+        <button class="back-btn" onclick="closeForm()">Back</button>
+    </div>
+</div>
+
+<script>
+
+// OPEN POPUP
+function openForm(){
+    document.getElementById("popup").style.display="flex";
+}
+
+// CLOSE POPUP
+function closeForm(){
+    document.getElementById("popup").style.display="none";
+}
+
+// SAVE HELPER (✅ FIXED)
+function saveHelper(){
+
+    let nameVal = document.getElementById("name").value;
+    let hidVal = document.getElementById("hid").value;
+    let emailVal = document.getElementById("email").value;
+
+    if(!nameVal || !hidVal || !emailVal){
+        alert("All fields required!");
+        return;
+    }
+
+    let form = new FormData();
+    form.append("name", nameVal);
+    form.append("helper_id", hidVal);
+    form.append("email", emailVal);
+
+    fetch("/CAMPUS-PROBLEM-REPORTER/backend/add_helper.php",{
+        method:"POST",
+        body:form
+    }).then(()=>{
+        closeForm();
+        loadHelpers();
+    });
+}
+
+// LOAD HELPERS
+function loadHelpers(){
+    fetch("/CAMPUS-PROBLEM-REPORTER/backend/get_helpers.php")
+    .then(res=>res.json())
+    .then(data=>{
+        let html="";
+        data.forEach(h=>{
+            html+=`
+            <div class="card">
+                <div class="name">${h.helper_name}</div>
+                <div class="info">ID: ${h.helper_id}</div>
+                <div class="info">${h.email}</div>
+
+                <div class="status ${h.status}">
+                    ${h.status.toUpperCase()}
+                </div><br>
+
+                <button class="btn toggle-btn"
+                    onclick="toggle(${h.id})">
+                    Toggle
+                </button>
+
+                <button class="btn mail-btn"
+                    onclick="sendMail('${h.email}')">
+                    Mail
+                </button>
+
+                <button class="btn remove-btn"
+                    onclick="removeHelper(${h.id}, this)">
+                    Remove
+                </button>
+            </div>`;
+        });
+
+        document.getElementById("helpers").innerHTML = html;
+    });
+}
+
+// TOGGLE STATUS
+function toggle(id){
+    let f=new FormData();
+    f.append("id",id);
+
+    fetch("/CAMPUS-PROBLEM-REPORTER/backend/toggle_helper.php",{
+        method:"POST",
+        body:f
+    }).then(()=>loadHelpers());
+}
+
+// REMOVE HELPER
+function removeHelper(id, btn){
+    if(!confirm("Delete this helper?")) return;
+
+    fetch("/CAMPUS-PROBLEM-REPORTER/backend/delete_helper.php?id=" + id)
+    .then(res => res.text())
+    .then(data => {
+        if(data.includes("success")){
+            let card = btn.closest(".card");
+            card.style.opacity = "0";
+            setTimeout(()=>card.remove(),300);
+        } else {
+            alert("Error: " + data);
+        }
+    });
+}
+
+// MAIL
+function sendMail(email){
+    let name = prompt("Enter Name:");
+    let location = prompt("Enter Location:");
+    let priority = prompt("Enter Priority:");
+    let problem = prompt("Enter Problem:");
+
+    if(!name || !location || !priority || !problem){
+        alert("All fields required!");
+        return;
+    }
+
+    let f = new FormData();
+    f.append("email", email);
+    f.append("name", name);
+    f.append("location", location);
+    f.append("priority", priority);
+    f.append("problem", problem);
+
+    fetch("/CAMPUS-PROBLEM-REPORTER/backend/send_mail.php",{
+        method:"POST",
+        body:f
+    })
+    .then(res => res.text())
+    .then(data => {
+        if(data.includes("success")){
+            alert("Mail sent successfully!");
+        } else {
+            alert("Mail failed: " + data);
+        }
+    });
+}
+
+// LOAD ON START
+loadHelpers();
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campus Problem Reporter - Student Dashboard</title>
+    <link rel="stylesheet" href="student-dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+
+<style>
+    
+</style>
+<body>
+
+<!-- ===================== TOP NAVBAR ===================== -->
+<header class="top-navbar">
+    <div class="logo">
+        <h2><i class="fa fa-university"></i> Campus Problem Reporter</h2>
+    </div>
+    <div class="search-box">
+        <input type="text" id="globalSearch" placeholder="Search complaint, department, issue ID...">
+        <button onclick="handleSearch()">Search</button>
+    </div>
+
+</header>
+
+<!-- ===================== SECOND NAVBAR ===================== -->
+<nav class="menu-bar">
+    <a href="#dashboard"      class="nav-active">Dashboard</a>
+    <a href="#departments">Departments</a>
+    <a href="#emergency">Emergency</a>
+    <a href="#services">Campus Services</a>
+    <a href="#section-title">Feedback</a>
+    <a href="#contact-admin-section">Contact Admin</a>
+</nav>
+
+<!-- ===================== HERO ===================== -->
+<section class="hero" id="dashboard">
+    <div class="hero-text">
+        <h1><i class="fa fa-graduation-cap"></i> Welcome to Smart Campus Portal</h1>
+        <p>Report campus issues, track resolution progress and stay connected with administration.</p>
+    </div>
+</section>
+
+<!-- ===================== QUICK ACTIONS ===================== -->
+<section class="quick-actions">
+    <a onclick="openModal('submitComplaintModal')">
+        <i class="fa fa-plus-circle"></i> Report New Issue
+    </a>
+    <a href="#section-title">
+        <i class="fa fa-star"></i> Feedback
+    </a>
+    <a href="http://localhost/CAMPUS-PROBLEM-REPORTER/frontend/student/contact.html">
+        <i class="fa fa-headset"></i> Contact Admin
+    </a>
+</section>
+
+<!-- ===================== EMERGENCY SECTION ===================== -->
+<section id="emergency" class="emergency">
+    <h2><i class="fa fa-exclamation-triangle"></i> Critical Emergency Services</h2>
+    <br>
+    <div class="grid-4">
+        <div class="emergency-card">
+            <i class="fa fa-female"></i>
+            <h3>Women Safety</h3>
+            <p>Emergency Helpline: 1091</p>
+        </div>
+        <div class="emergency-card">
+            <i class="fa fa-ambulance"></i>
+            <h3>Ambulance</h3>
+            <p>Call: 108</p>
+        </div>
+        <div class="emergency-card">
+            <i class="fa fa-medkit"></i>
+            <h3>Medical Room</h3>
+            <p>24x7 Campus Facility</p>
+        </div>
+        <div class="emergency-card">
+            <i class="fa fa-fire"></i>
+            <h3>Fire Safety</h3>
+            <p>Call: 101</p>
+        </div>
+        <div class="emergency-card">
+            <i class="fa fa-shield-alt"></i>
+            <h3>Anti-Ragging</h3>
+            <p>Helpline: 1800-180-5522</p>
+        </div>
+        <div class="emergency-card">
+            <i class="fa fa-child"></i>
+            <h3>Child Missing</h3>
+            <p>Call: 1098</p>
+        </div>
+    </div>
+</section>
+
+<!-- ===================== ADVERTISEMENT ===================== -->
+<section class="safe-campus-ad">
+    <div class="ad-left">
+        <h2>Safe &amp; Smart Campus Initiative</h2>
+        <p>
+            Our campus ensures safety, transparency and quick support.
+            Students can report issues, access emergency services,
+            and stay connected with administration easily.
+        </p>
+        <ul>
+            <li>🛡 Campus Security</li>
+            <li>🚑 Emergency Medical Assistance</li>
+            <li>📢 Easy Problem Reporting</li>
+            <li>🤝 Student Friendly Governance</li>
+        </ul>
+    </div>
+    <div class="ad-right">
+        <div class="slider-container">
+            <div>
+                <img src="https://tse4.mm.bing.net/th/id/OIP.7MKn9uKtBggXi9G15hAhyQHaHx?rs=1&pid=ImgDetMain&o=7&rm=3" alt="campus" style="height: 350px; width: 900px;">
+                <!--<img src="https://images.unsplash.com/photo-1562774053-701939374585?w=600" alt="campus">
+                <img src="https://images.unsplash.com/photo-1577896851231-70ef18881754?w=600" alt="campus">
+                <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=600" alt="campus">
+                <img src="https://images.unsplash.com/photo-1588072432836-e10032774350?w=600" alt="campus">-->
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===================== DEPARTMENT SECTION ===================== -->
+<section class="services" id="departments">
+    <div class="service-grid">
+        <div class="service-card" onclick="openComplaintFor('Electrical')">
+            <i class="fa fa-bolt"></i>
+            <h3>Electrical</h3>
+        </div>
+        <div class="service-card" onclick="openComplaintFor('Water & Plumbing')">
+            <i class="fa fa-tint"></i>
+            <h3>Water &amp; Plumbing</h3>
+        </div>
+        <div class="service-card" onclick="openComplaintFor('IT Support')">
+            <i class="fa fa-wifi"></i>
+            <h3>IT Support</h3>
+        </div>
+        <div class="service-card" onclick="openComplaintFor('Infrastructure')">
+            <i class="fa fa-building"></i>
+            <h3>Infrastructure</h3>
+        </div>
+        <div class="service-card" onclick="openComplaintFor('Security')">
+            <i class="fa fa-shield-alt"></i>
+            <h3>Security</h3>
+        </div>
+        <div class="service-card" onclick="openComplaintFor('Library')">
+            <i class="fa fa-book"></i>
+            <h3>Library</h3>
+        </div>
+    </div>
+</section>
+
+<!-- ===================== CAMPUS SERVICES ===================== -->
+<section id="services">
+    <h2 id="Campus">Campus Services (20+ Features)</h2>
+    <div class="features-list">
+        <a href="http://localhost/CAMPUS-PROBLEM-REPORTER/frontend/student/complaint-from.html">Library Complaint</a>
+        <a href="http://localhost/CAMPUS-PROBLEM-REPORTER/frontend/student/complaint-from.html">Construction Issue</a>
+        <a href="http://localhost/CAMPUS-PROBLEM-REPORTER/frontend/student/complaint-from.html">Canteen Feedback</a>
+        <a href="http://localhost/CAMPUS-PROBLEM-REPORTER/frontend/student/complaint-from.html">Transport Issue</a>
+        <a href="http://localhost/CAMPUS-PROBLEM-REPORTER/frontend/student/complaint-from.html">Lab Equipment</a>
+        <a href="http://localhost/CAMPUS-PROBLEM-REPORTER/frontend/student/complaint-from.html">Classroom Maintenance</a>
+        <a href="http://localhost/CAMPUS-PROBLEM-REPORTER/frontend/student/complaint-from.html">Parking Issue</a>
+        <a href="http://localhost/CAMPUS-PROBLEM-REPORTER/frontend/student/complaint-from.html">Water Cooler Problem</a>
+        <a href="http://localhost/CAMPUS-PROBLEM-REPORTER/frontend/student/complaint-from.html">Street Light Issue</a>
+        <a href="http://localhost/CAMPUS-PROBLEM-REPORTER/frontend/student/complaint-from.html">Lift Not Working</a>
+        <a href="http://localhost/CAMPUS-PROBLEM-REPORTER/frontend/student/complaint-from.html">Exam Cell Query</a>
+        <a href="http://localhost/CAMPUS-PROBLEM-REPORTER/frontend/student/complaint-from.html">Administration Office</a>
+        <a href="http://localhost/CAMPUS-PROBLEM-REPORTER/frontend/student/complaint-from.html">Sports Ground Issue</a>
+        <a href="http://localhost/CAMPUS-PROBLEM-REPORTER/frontend/student/complaint-from.html">Campus Cleanliness</a>
+        <a href="http://localhost/CAMPUS-PROBLEM-REPORTER/frontend/student/complaint-from.html">Toilet Maintenance</a>
+        <a href="http://localhost/CAMPUS-PROBLEM-REPORTER/frontend/student/complaint-from.html">Power Failure</a>
+        <a href="http://localhost/CAMPUS-PROBLEM-REPORTER/frontend/student/complaint-from.html">Computer Lab Issue</a>
+        <a href="http://localhost/CAMPUS-PROBLEM-REPORTER/frontend/student/complaint-from.html">Projector Not Working</a>
+        <a href="http://localhost/CAMPUS-PROBLEM-REPORTER/frontend/student/complaint-from.html">Furniture Damage</a>
+        <a href="http://localhost/CAMPUS-PROBLEM-REPORTER/frontend/student/complaint-from.html">Counseling Cell</a>
+        <a href="http://localhost/CAMPUS-PROBLEM-REPORTER/frontend/student/complaint-from.html">Admin Office</a>
+        <a href="http://localhost/CAMPUS-PROBLEM-REPORTER/frontend/student/complaint-from.html">Snake / Wildlife In Campus</a>
+        <a href="http://localhost/CAMPUS-PROBLEM-REPORTER/frontend/student/complaint-from.html">Other Complaints</a>
+    </div>
+</section>
+
+
+
+<!-- ================= DEPARTMENT COMPLAINT PORTAL ================= -->
+<section class="dept-main-container">
+    <div class="left-section">
+        <div class="info-content">
+            <h2>Department Wise Complaint Portal</h2>
+            <p>This section allows students to file complaints related to:</p>
+            <ul>
+                <li>Teacher Harassment</li>
+                <li>Unfair Internal Marking</li>
+                <li>Lab Equipment Issues</li>
+                <li>Attendance Manipulation</li>
+                <li>Ragging or Bullying</li>
+                <li>Administrative Misconduct</li>
+                <li>Academic Discrimination</li>
+            </ul>
+            <p class="note">
+                All complaints are handled confidentially and forwarded
+                to the respective department head or disciplinary authority.
+            </p>
+        </div>
+        <div class="slider">
+            <div>
+                <img src="https://tse1.mm.bing.net/th/id/OIP.aCicj5sS9wiwxwrbopwpagHaE8?rs=1&pid=ImgDetMain&o=7&rm=3" alt="campus" style="height: 245px; border-radius: 0px; width: 435px;">
+                <img src="https://tse4.mm.bing.net/th/id/OIP.1fa1LS5NccdQxhvrfqXOOwHaFj?rs=1&pid=ImgDetMain&o=7&rm=3" alt="campus" style="height: 245px; border-radius: 0px; width: 435px;">
+            </div>
+        </div>
+    </div>
+
+    <div class="right-section">
+        <h3 style="font-size: 20px;"><i class="fa fa-paper-plane"></i> Submit Department Complaint</h3>
+<form action="/CAMPUS-PROBLEM-REPORTER/backend/submit_department.php" method="POST" style="font-size: 20px;"> 
+
+
+    <label style=" margin-left: 5%; font-weight: bold;">Select Department</label><br>
+    <select name="department" required style="height: 40px; width: 90%; margin-left: 5%;  font-size: 20px; text-indent: 10px;">
+        <option value="" >Choose Department</option>
+        <option>MTech</option>
+        <option>MCA</option>
+        <option>MBA</option>
+        <option>BTech - CSE</option>
+        <option>Electrical</option>
+        <option>Mechanical</option>
+        <option>Civil</option>
+        <option>AIDS</option>
+        <option>AIML</option>
+        <option>Telecommunication</option>
+        <option>Pharmacy</option>
+        <option>BAMS</option>
+        <option>BHMS</option>
+        <option>School (1-12)</option>
+        <option>Library</option>
+        <option>BSc Nursing</option>
+        <option>Agriculture</option>
+    </select>
+
+    <br><br>
+    <label style=" margin-left: 5%; font-weight: bold;">Complaint Title</label><br>
+    <input type="text" name="title" required style="height: 40px; width: 90%; margin-left: 5%; font-size: 20px; text-indent: 10px;">
+
+    <br><br>
+    <label style=" margin-left: 5%; font-weight: bold;">Description</label><br>
+    <textarea name="description" required style="height: 40px; width: 90%; margin-left: 5%;  font-size: 20px; text-indent: 10px;"></textarea>
+
+    <br><br>
+    <label style=" margin-left: 5%; font-weight: bold;">Priority</label><br>
+    <select name="priority" required style="height: 40px; width: 90% ; margin-left: 5%;  font-size: 20px; text-indent: 10px;">
+        <option value="low">Low</option>
+        <option value="medium" selected>Medium</option>
+        <option value="high">High</option>
+    </select>
+
+    <br><br>
+    <button type="submit" style="height: 40px; width: 30%; color: white; background-color: #0d9488; border:none; margin-left: 35%; font-size: 20px;">Submit Complaint</button>
+
+</form>
+    </div>
+</section>
+
+<!-- ================= FEEDBACK & SUGGESTION ================= -->
+<section class="feedback-wrapper" id="section-title">
+    <h2>Student Feedback and Suggestions</h2>
+    <div class="forms-container">
+
+        <div class="form-card">
+            <h3><i class="fa fa-star"></i> Service Satisfaction Feedback and Suggestion Form</h3>
+            <form action="/CAMPUS-PROBLEM-REPORTER/backend/submit_feedback.php" method="POST">
+
+    <div class="form-group">
+        <label>Related Complaint ID (Optional)</label>
+        <input type="text" name="complaint_id" placeholder="e.g. CP2026-001">
+    </div>
+
+    <div class="form-group">
+        <label>Select Service</label>
+        <select name="service" required>
+            <option value="">Choose Service</option>
+            <option>Electrical</option>
+            <option>IT Support</option>
+            <option>Water & Plumbing</option>
+            <option>Library</option>
+            <option>Hostel</option>
+            <option>Transport</option>
+            <option>Security</option>
+            <option>Infrastructure</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>Your Feedback or Suggestion</label>
+        <textarea name="comment" placeholder="Write your feedback..." required></textarea>
+    </div>
+
+    <button type="submit" class="submit-btn" >
+        Submit Feedback
+    </button>
+
+</form>
+        </div>
+
+        
+</section>
+
+
+
+<!-- ================= FOOTER ================= -->
+<footer class="footer">
+    <div class="footer-container">
+        <div class="footer-col">
+            <h3>Campus Portal</h3>
+            <p>Smart platform for managing campus services,
+               student feedback and communication efficiently.</p>
+        </div>
+        <div class="footer-col">
+            <h3>Quick Links</h3>
+            <ul>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#section-title">Feedback</a></li>
+                <li><a href="#my-complaints">My Complaints</a></li>
+                <li><a href="#contact-admin-section">Contact Admin</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h3>Emergency Contacts</h3>
+            <ul>
+                <li>Women Helpline — 1091</li>
+                <li>Ambulance — 108</li>
+                <li>Fire Safety — 101</li>
+                <li>Campus Security — Ext 103</li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h3>Subscribe Updates</h3>
+            <p>Get important campus notifications.</p>
+            <div class="newsletter">
+                <input type="email" id="newsletterEmail"
+                       placeholder="Enter your email">
+                <button onclick="subscribeNewsletter()">Subscribe</button>
+            </div>
+            <div class="social-icons">
+                <i class="fa fa-facebook"></i>
+                <i class="fa fa-instagram"></i>
+                <i class="fa fa-twitter"></i>
+                <i class="fa fa-linkedin"></i>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        &copy; 2026 Smart Campus Portal | Designed for Academic Project
+    </div>
+</footer>
+
+<!-- ===== MODAL: SUBMIT COMPLAINT ===== -->
+<div class="modal-overlay" id="submitComplaintModal">
+    <div class="modal-box">
+        <div class="modal-header">
+            <h3><i class="fa fa-plus-circle"></i> Report New Issue</h3>
+            <button class="close-modal"
+                    onclick="closeModal('submitComplaintModal')">&#x2715;</button>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <label>Department <span style="color:#ef4444">*</span></label>
+                <select id="cDept" required>
+                    <option value="">Select Department</option>
+                    <option>Electrical</option>
+                    <option>Water & Plumbing</option>
+                    <option>IT Support</option>
+                    <option>Infrastructure</option>
+                    <option>Security</option>
+                    <option>Library</option>
+                    <option>Transport</option>
+                    <option>Canteen</option>
+                    <option>Housekeeping</option>
+                    <option>Administration</option>
+                    <option>Other</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Category / Issue Type <span style="color:#ef4444">*</span></label>
+                <input type="text" id="cCategory"
+                       placeholder="e.g. Power Failure, WiFi Issue">
+            </div>
+            <div class="form-group">
+                <label>Location <span style="color:#ef4444">*</span></label>
+                <input type="text" id="cLocation"
+                       placeholder="e.g. Block C, Room 301, 2nd Floor">
+            </div>
+            <div class="form-group">
+                <label>Description <span style="color:#ef4444">*</span></label>
+                <textarea id="cDescription"
+                          placeholder="Describe the problem in detail..."></textarea>
+            </div>
+            <div class="form-group">
+                <label>Priority</label>
+                <select id="cPriority">
+                    <option value="low">Low</option>
+                    <option value="medium" selected>Medium</option>
+                    <option value="high">High</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>
+                    <input type="checkbox" id="cEmergency"
+                           style="width:auto;margin-right:6px">
+                    Mark as Emergency
+                </label>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn-primary" onclick="submitComplaint()">
+                <i class="fa fa-paper-plane"></i> Submit
+            </button>
+            <button class="btn-secondary"
+                    onclick="closeModal('submitComplaintModal')">Cancel</button>
+        </div>
+    </div>
+</div>
+
+<!-- ===== MODAL: VIEW COMPLAINT ===== -->
+<div class="modal-overlay" id="viewComplaintModal">
+    <div class="modal-box">
+        <div class="modal-header">
+            <h3><i class="fa fa-eye"></i> Complaint Details</h3>
+            <button class="close-modal"
+                    onclick="closeModal('viewComplaintModal')">&#x2715;</button>
+        </div>
+        <div class="modal-body" id="viewComplaintBody"></div>
+        <div class="modal-footer">
+            <button class="btn-secondary"
+                    onclick="closeModal('viewComplaintModal')">Close</button>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Toast -->
+<div id="toastMsg" class="toast"></div>
+</body>
+</html>

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Add Admin</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+    height: 100vh;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url('https://imgs.search.brave.com/1wT_P6sA9pmHQu9RBOD2nPjdYcSY1BeQTnW21DSBiMw/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5nZXR0eWltYWdl/cy5jb20vaWQvMjAx/Nzg3MTQ1Ni92ZWN0/b3IvYWJzdHJhY3Qt/b3ZlcmxhcC1kYXJr/LWJsdWUtYmFja2dy/b3VuZC13aXRoLWJs/YW5rLXNwYWNlLWRl/c2lnbi5qcGc_cz02/MTJ4NjEyJnc9MCZr/PTIwJmM9SjRPQ2NE/bnBHOGVoTmtQRG5U/NG5jQ3hJeHNBbUlm/NGtiZnhmWXpNNDJL/OD0');
+    background-size: 100% 100%;
+}
+
+.container {
+    background: #fff;
+    padding: 30px;
+    width: 380px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    outline: none;
+    transition: 0.3s;
+}
+
+.form-group input:focus {
+    border-color: #667eea;
+}
+
+.error {
+    color: red;
+    font-size: 12px;
+    margin-top: 3px;
+}
+
+.success-border {
+    border-color: green !important;
+}
+
+.error-border {
+    border-color: red !important;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    background: #667eea;
+    color: white;
+    font-size: 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #5a67d8;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h2>Add Admin</h2>
+
+    <!-- Backend Ready Form -->
+    <form id="helperForm" action="/CAMPUS-PROBLEM-REPORTER/backend/add_admin.php" method="POST">
+
+        <div class="form-group">
+            <label>Full Name</label>
+            <input type="text" name="full_name" id="fullName">
+            <div class="error" id="fullNameError"></div>
+        </div>
+
+        <div class="form-group">
+            <label>Contact Number</label>
+            <input type="text" name="contact" id="contact">
+            <div class="error" id="contactError"></div>
+        </div>
+
+        <div class="form-group">
+            <label>Email</label>
+            <input type="email" name="email" id="email">
+            <div class="error" id="emailError"></div>
+        </div>
+
+        <div class="form-group">
+            <label>Password</label>
+            <input type="text" name="password" id="password">
+            <div class="error" id="empIdError"></div>
+        </div>
+
+        <button type="submit">Add Helper</button>
+    </form>
+</div>
+
+<script>
+const form = document.getElementById("helperForm");
+
+const fullName = document.getElementById("fullName");
+const contact = document.getElementById("contact");
+const email = document.getElementById("email");
+const empId = document.getElementById("empId");
+
+// Validation function
+function setValidation(input, condition, errorId, message) {
+    const error = document.getElementById(errorId);
+
+    if (!condition) {
+        error.textContent = message;
+        input.classList.add("error-border");
+        input.classList.remove("success-border");
+        return false;
+    } else {
+        error.textContent = "";
+        input.classList.remove("error-border");
+        input.classList.add("success-border");
+        return true;
+    }
+}
+
+// Real-time validation
+fullName.addEventListener("input", () => {
+    setValidation(fullName, fullName.value.trim() !== "", "fullNameError", "Full name is required");
+});
+
+contact.addEventListener("input", () => {
+    setValidation(contact, /^[0-9]{10}$/.test(contact.value), "contactError", "Enter valid 10-digit number");
+});
+
+email.addEventListener("input", () => {
+    setValidation(email, /^\S+@\S+\.\S+$/.test(email.value), "emailError", "Invalid email");
+});
+
+empId.addEventListener("input", () => {
+    setValidation(empId, empId.value.trim() !== "", "empIdError", "Employee ID required");
+});
+
+// On submit
+form.addEventListener("submit", function(e) {
+    const valid =
+        setValidation(fullName, fullName.value.trim() !== "", "fullNameError", "Full name is required") &&
+        setValidation(contact, /^[0-9]{10}$/.test(contact.value), "contactError", "Enter valid 10-digit number") &&
+        setValidation(email, /^\S+@\S+\.\S+$/.test(email.value), "emailError", "Invalid email") &&
+        setValidation(empId, empId.value.trim() !== "", "empIdError", "Employee ID required");
+
+    if (!valid) {
+        e.preventDefault();
+    }
+});
+</script>
+
+</body>
+</html>

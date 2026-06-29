@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Add Student</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+    height: 100vh;
+    background: linear-gradient(135deg, #4facfe, #00f2fe);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url('https://imgs.search.brave.com/1wT_P6sA9pmHQu9RBOD2nPjdYcSY1BeQTnW21DSBiMw/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5nZXR0eWltYWdl/cy5jb20vaWQvMjAx/Nzg3MTQ1Ni92ZWN0/b3IvYWJzdHJhY3Qt/b3ZlcmxhcC1kYXJr/LWJsdWUtYmFja2dy/b3VuZC13aXRoLWJs/YW5rLXNwYWNlLWRl/c2lnbi5qcGc_cz02/MTJ4NjEyJnc9MCZr/PTIwJmM9SjRPQ2NE/bnBHOGVoTmtQRG5U/NG5jQ3hJeHNBbUlm/NGtiZnhmWXpNNDJL/OD0');
+    background-size: 100% 100%;
+}
+
+.container {
+    background: #fff;
+    padding: 35px;
+    width: 380px;
+    border-radius: 15px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+    animation: fadeIn 0.6s ease;
+}
+
+@keyframes fadeIn {
+    from {opacity:0; transform: translateY(20px);}
+    to {opacity:1; transform: translateY(0);}
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #333;
+}
+
+.form-group {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    outline: none;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.form-group label {
+    position: absolute;
+    top: 12px;
+    left: 10px;
+    color: #888;
+    font-size: 14px;
+    pointer-events: none;
+    transition: 0.3s;
+    background: #fff;
+    padding: 0 5px;
+}
+
+.form-group input:focus,
+.form-group input:not(:placeholder-shown) {
+    border-color: #4facfe;
+}
+
+.form-group input:focus + label,
+.form-group input:not(:placeholder-shown) + label {
+    top: -8px;
+    font-size: 12px;
+    color: #4facfe;
+}
+
+.error {
+    font-size: 12px;
+    color: red;
+    margin-top: 4px;
+}
+
+.success-border {
+    border-color: green !important;
+}
+
+.error-border {
+    border-color: red !important;
+}
+
+.password-toggle {
+    position: absolute;
+    right: 10px;
+    top: 12px;
+    cursor: pointer;
+    font-size: 14px;
+    color: #666;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    background: #4facfe;
+    color: white;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #00c6ff;
+}
+
+.success-message {
+    text-align: center;
+    color: green;
+    margin-top: 10px;
+    display: none;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h2>Add Student</h2>
+
+    <form id="form" action="/CAMPUS-PROBLEM-REPORTER/backend/add_student.php" method="POST">
+
+        <div class="form-group">
+            <input type="text" name="first_name" id="firstName" placeholder=" " required>
+            <label>First Name</label>
+            <div class="error" id="firstNameError"></div>
+        </div>
+
+        <div class="form-group">
+            <input type="text" name="last_name" id="lastName" placeholder=" " required>
+            <label>Last Name</label>
+            <div class="error" id="lastNameError"></div>
+        </div>
+
+        <div class="form-group">
+            <input type="text" name="phone" id="phone" placeholder=" " required>
+            <label>Phone Number</label>
+            <div class="error" id="phoneError"></div>
+        </div>
+
+        <div class="form-group">
+            <input type="email" name="email" id="email" placeholder=" " required>
+            <label>Email</label>
+            <div class="error" id="emailError"></div>
+        </div>
+
+        <div class="form-group">
+            <input type="password" name="password" id="password" placeholder=" " required>
+            <label>Password</label>
+            <span class="password-toggle" onclick="togglePassword()">👁️</span>
+            <div class="error" id="passwordError"></div>
+        </div>
+
+        <button type="submit">Add Student</button>
+        <div class="success-message" id="successMsg">Form looks good 👍</div>
+    </form>
+</div>
+
+<script>
+const form = document.getElementById("form");
+
+const inputs = {
+    firstName: document.getElementById("firstName"),
+    lastName: document.getElementById("lastName"),
+    phone: document.getElementById("phone"),
+    email: document.getElementById("email"),
+    password: document.getElementById("password")
+};
+
+function validateField(id, condition, message) {
+    const input = inputs[id];
+    const error = document.getElementById(id + "Error");
+
+    if (!condition) {
+        error.textContent = message;
+        input.classList.add("error-border");
+        input.classList.remove("success-border");
+        return false;
+    } else {
+        error.textContent = "";
+        input.classList.remove("error-border");
+        input.classList.add("success-border");
+        return true;
+    }
+}
+
+// Real-time validation
+inputs.firstName.addEventListener("input", () =>
+    validateField("firstName", inputs.firstName.value.trim() !== "", "Required")
+);
+
+inputs.lastName.addEventListener("input", () =>
+    validateField("lastName", inputs.lastName.value.trim() !== "", "Required")
+);
+
+inputs.phone.addEventListener("input", () =>
+    validateField("phone", /^[0-9]{10}$/.test(inputs.phone.value), "Enter 10-digit number")
+);
+
+inputs.email.addEventListener("input", () =>
+    validateField("email", /^\S+@\S+\.\S+$/.test(inputs.email.value), "Invalid email")
+);
+
+inputs.password.addEventListener("input", () =>
+    validateField("password", inputs.password.value.length >= 6, "Min 6 characters")
+);
+
+// Toggle password
+function togglePassword() {
+    const pass = inputs.password;
+    pass.type = pass.type === "password" ? "text" : "password";
+}
+
+// Submit validation
+form.addEventListener("submit", function(e) {
+    const valid =
+        validateField("firstName", inputs.firstName.value.trim() !== "", "Required") &&
+        validateField("lastName", inputs.lastName.value.trim() !== "", "Required") &&
+        validateField("phone", /^[0-9]{10}$/.test(inputs.phone.value), "Enter 10-digit number") &&
+        validateField("email", /^\S+@\S+\.\S+$/.test(inputs.email.value), "Invalid email") &&
+        validateField("password", inputs.password.value.length >= 6, "Min 6 characters");
+
+    if (!valid) {
+        e.preventDefault();
+    } else {
+        document.getElementById("successMsg").style.display = "block";
+    }
+});
+</script>
+
+</body>
+</html>

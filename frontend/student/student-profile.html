@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Profile</title>
+    <link rel="stylesheet" href="student-profile.css">
+</head>
+<body>
+
+   <a href="/frontend/student/student-dashboard.html" id="one">Back To Dashboard</a>
+
+<div class="profile-container">
+
+
+    <h2>Student Profile</h2>
+
+    <form id="profileForm">
+
+        <!-- ===== Personal Information ===== -->
+        <div class="section">
+            <h3>Personal Information</h3>
+
+            <div class="grid">
+                <div class="input-group">
+                    <label>Full Name</label>
+                    <input type="text" id="fullName">
+                </div>
+
+                <div class="input-group">
+                    <label>Email</label>
+                    <input type="email" id="email">
+                </div>
+
+                <div class="input-group">
+                    <label>Phone Number</label>
+                    <input type="text" id="phone">
+                </div>
+
+                <div class="input-group">
+                    <label>Date of Birth</label>
+                    <input type="date" id="dob">
+                </div>
+
+                <div class="input-group">
+                    <label>Gender</label>
+                    <select id="gender">
+                        <option value="">Select</option>
+                        <option>Male</option>
+                        <option>Female</option>
+                        <option>Other</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label>Blood Group</label>
+                    <input type="text" id="bloodGroup">
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== Address Information ===== -->
+        <div class="section">
+            <h3>Address Information</h3>
+
+            <div class="grid">
+                <div class="input-group">
+                    <label>Address Line</label>
+                    <input type="text" id="address">
+                </div>
+
+                <div class="input-group">
+                    <label>City</label>
+                    <input type="text" id="city">
+                </div>
+
+                <div class="input-group">
+                    <label>State</label>
+                    <input type="text" id="state">
+                </div>
+
+                <div class="input-group">
+                    <label>Pincode</label>
+                    <input type="text" id="pincode">
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== Academic Information ===== -->
+        <div class="section">
+            <h3>Academic Information</h3>
+
+            <div class="grid">
+                <div class="input-group">
+                    <label>Roll Number</label>
+                    <input type="text" id="rollNo">
+                </div>
+
+                <div class="input-group">
+                    <label>Student Id</label>
+                    <input type="text" id="rollNo">
+                </div>
+
+                <div class="input-group">
+                    <label>Department</label>
+                    <input type="text" id="department">
+                </div>
+
+                <div class="input-group">
+                    <label>Year</label>
+                    <select id="year">
+                        <option value="">Select</option>
+                        <option>FY</option>
+                        <option>SY</option>
+                        <option>TY</option>
+                        <option>Final Year</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label>Division</label>
+                    <input type="text" id="division">
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== Parent Information ===== -->
+        <div class="section">
+            <h3>Parent / Guardian Information</h3>
+
+            <div class="grid">
+                <div class="input-group">
+                    <label>Father's Name</label>
+                    <input type="text" id="fatherName">
+                </div>
+
+                <div class="input-group">
+                    <label>Mother's Name</label>
+                    <input type="text" id="motherName">
+                </div>
+
+                <div class="input-group">
+                    <label>Parent Contact</label>
+                    <input type="text" id="parentContact">
+                </div>
+
+                <div class="input-group">
+                    <label>Parent Email</label>
+                    <input type="email" id="parentEmail">
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== Medical Information ===== -->
+        <div class="section">
+            <h3>Medical Information</h3>
+
+            <div class="grid">
+                <div class="input-group">
+                    <label>Medical Condition</label>
+                    <input type="text" id="medicalCondition">
+                </div>
+
+                <div class="input-group">
+                    <label>Emergency Contact Name</label>
+                    <input type="text" id="emergencyName">
+                </div>
+
+                <div class="input-group">
+                    <label>Emergency Contact Number</label>
+                    <input type="text" id="emergencyContact">
+                </div>
+            </div>
+        </div>
+
+        <!-- Buttons -->
+        <div class="button-group">
+            <button type="button" id="editBtn">Edit</button>
+            <button type="button" id="saveBtn">Save</button>
+        </div>
+
+    </form>
+</div>
+
+<script src="student-profile.js"></script>
+</body>
+</html>

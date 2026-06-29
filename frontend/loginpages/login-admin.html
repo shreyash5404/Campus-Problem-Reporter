@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Login | Campus Incident System</title>
+    <link rel="stylesheet" href="login-admin.css">
+</head>
+<body>
+
+<div class="main-container">
+
+    <div class="login-card">
+
+        <!-- Left Section -->
+        <div class="image-section">
+            <img src="https://cdn-icons-png.flaticon.com/512/921/921347.png" alt="Admin">
+            <h2>Admin Portal</h2>
+            <p>Manage complaints, assign helpers and monitor system activity.</p>
+        </div>
+
+        <!-- Right Section -->
+        <div class="form-section">
+
+            <h3>Administrator Login</h3>
+
+        <form id="adminLoginForm" action="/CAMPUS-PROBLEM-REPORTER/backend/login_admin.php" method="POST">
+
+            <div class="form-group">
+                <label>Email Address</label>
+                <input type="email" name="email" placeholder="Enter admin email" id="email" required>
+            </div>
+
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" name="password" placeholder="Enter password" id="password" required>
+            </div>
+
+            <div class="form-options">
+                <a href="forgot-password.html">Forgot Password?</a>
+            </div>
+
+            <button type="submit" class="login-btn">Login</button>
+
+            <a href="index.html" class="back-link">Back to Home</a>
+
+        </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="login-admin.js"></script>
+</body>
+</html>

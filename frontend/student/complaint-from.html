@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit Complaint — Campus Problem Reporter</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="http://localhost/CAMPUS-PROBLEM-REPORTER/frontend/student/complaint_form.css">
+</head>
+<body>
+
+<form action="/campus-problem-reporter/backend/submit_complaint.php" 
+      method="POST" 
+      enctype="multipart/form-data">
+<!-- TOP BAR -->
+<div class="top-bar">
+    <div class="top-bar-left">
+        <a href="http://localhost/CAMPUS-PROBLEM-REPORTER/frontend/student/student-dashboard.html?#section-title" class="back-btn">
+            <i class="fa fa-arrow-left"></i> Back to Dashboard
+        </a>
+        <div class="portal-name">
+            <i class="fa fa-university"></i>
+            Campus Problem Reporter
+        </div>
+    </div>
+    <div class="top-bar-right">
+        <span class="student-badge">
+            <i class="fa fa-user-circle"></i>
+            <span id="topStudentName">Student</span>
+        </span>
+        <span class="id-badge" id="topStudentId"></span>
+    </div>
+</div>
+
+<!-- EMERGENCY BANNER -->
+<div class="emergency-banner" id="emergencyBanner">
+    <div class="emergency-banner-inner">
+        <i class="fa fa-exclamation-triangle fa-pulse"></i>
+        <div>
+            <strong>EMERGENCY COMPLAINT</strong>
+            <p>This will be flagged as urgent and immediately notified to admin and security.</p>
+        </div>
+    </div>
+</div>
+
+<!-- PAGE WRAPPER -->
+<div class="page-wrapper">
+
+    <!-- MAIN FORM -->
+    <div id="mainForm">
+
+        <!-- ALERT BOX -->
+        <div class="form-alert" id="formAlert">
+            <i class="fa fa-exclamation-circle"></i>
+            <span id="formAlertText"></span>
+        </div>
+
+        <!-- ===== SECTION 1: COMPLAINT INFO ===== -->
+        <div class="section-card">
+            <div class="section-title">
+                <i class="fa fa-clipboard-list"></i>
+                Complaint Information
+            </div>
+
+            <!-- Location -->
+            <div class="form-group">
+                <label>
+                    <i class="fa fa-map-marker-alt"></i>
+                    Exact Location / Address on Campus
+                    <span class="req">*</span>
+                </label>
+                <input type="text" id="f_location" name="location"
+                       placeholder="e.g. Block C, Room 301, 2nd Floor — Near staircase">
+                <span class="hint">
+                    <i class="fa fa-info-circle"></i>
+                    Be specific so the helper can reach the exact spot
+                </span>
+            </div>
+
+            <!-- Description -->
+            <div class="form-group">
+                <label>
+                    <i class="fa fa-align-left"></i>
+                    Problem Description <span class="req">*</span>
+                </label>
+                <textarea id="f_description" name="description"
+                          placeholder="Describe the problem clearly:
+- What exactly is the issue?
+- When did it start?
+- How many students / people are affected?
+- Any safety risk involved?"></textarea>
+                <div class="char-row">
+                    <span class="hint">Minimum 20 characters</span>
+                    <span class="char-count" id="charCount">0 / 500</span>
+                </div>
+            </div>
+
+            <!-- Priority -->
+            <div class="form-group">
+                <label>
+                    <i class="fa fa-tachometer-alt"></i>
+                    Priority Level <span class="req">*</span>
+                </label>
+                <div class="priority-grid">
+                    <div class="priority-card" data-val="low" onclick="setPriority('low')">
+                        <i class="fa fa-circle" style="color:#10b981"></i>
+                        <strong>Low</strong>
+                        <span>Minor issue, not urgent</span>
+                    </div>
+                    <div class="priority-card selected" data-val="medium" onclick="setPriority('medium')">
+                        <i class="fa fa-circle" style="color:#f59e0b"></i>
+                        <strong>Medium</strong>
+                        <span>Needs attention soon</span>
+                    </div>
+                    <div class="priority-card" data-val="high" onclick="setPriority('high')">
+                        <i class="fa fa-circle" style="color:#ef4444"></i>
+                        <strong>High</strong>
+                        <span>Urgent — causing problems now</span>
+                    </div>
+                </div>
+                <input type="hidden" id="f_priority" value="medium" name="priority">
+            </div>
+
+
+        <!-- ===== SECTION 2: STUDENT DETAILS ===== -->
+        <div class="section-card">
+            <div class="section-title">
+                <i class="fa fa-user-circle"></i>
+                Your Details
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Full Name <span class="req">*</span></label>
+                    <input type="text" id="f_name" placeholder="Your full name" name="name">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Department / Branch <span class="req">*</span></label>
+                    <input type="text" id="f_studentDept" placeholder="e.g. BTech CSE, MCA, MBA" name="department">
+                    <input type="hidden" id="f_category" value="General">
+                </div>
+                <div class="form-group">
+                    <label>Semester / Year</label>
+                    <select id="f_semester" name="semester">
+                        <option value="">Select semester</option>
+                        <option>1st Semester</option>
+                        <option>2nd Semester</option>
+                        <option>3rd Semester</option>
+                        <option>4th Semester</option>
+                        <option>5th Semester</option>
+                        <option>6th Semester</option>
+                        <option>7th Semester</option>
+                        <option>8th Semester</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Contact Number <span class="req">*</span></label>
+                    <input type="tel" id="f_contact" name="contact"
+                           placeholder="10-digit mobile number" maxlength="10">
+                    <span class="hint">Admin may call you if needed</span>
+                </div>
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" id="f_email" placeholder="your@email.com" name="email">
+                    <span class="hint">For status update notifications</span>
+                </div>
+            </div>
+
+        <!-- ===== SECTION 3: MEDIA UPLOAD ===== -->
+        <div class="section-card">
+            <div class="section-title">
+                <i class="fa fa-paperclip"></i>
+                Attach Photo / Video
+                <span style="font-size:11px;background:#e0f2fe;color:#0369a1;padding:2px 8px;border-radius:8px;font-weight:600;margin-left:8px;">Optional</span>
+            </div>
+
+            <div class="upload-info-bar">
+                <div class="info-chip">
+                    <i class="fa fa-image" style="color:#3b82f6"></i> Photos: JPG, PNG, GIF
+                </div>
+                <div class="info-chip">
+                    <i class="fa fa-video" style="color:#8b5cf6"></i> Videos: MP4 only
+                </div>
+                <div class="info-chip warn-chip">
+                    <i class="fa fa-exclamation-triangle" style="color:#f59e0b"></i>
+                    Max <strong>50KB per file</strong>
+                </div>
+                <div class="info-chip">
+                    <i class="fa fa-copy" style="color:#10b981"></i> Up to 5 files
+                </div>
+            </div>
+
+            <div class="drop-zone" id="dropZone"
+                 onclick="document.getElementById('f_media').click()"
+                 ondragover="onDragOver(event)"
+                 ondragleave="onDragLeave(event)"
+                 ondrop="onDrop(event)">
+                <div class="drop-inner">
+                    <i class="fa fa-cloud-upload-alt"></i>
+                    <p>Click to upload or drag &amp; drop here</p>
+                    <span>Photos and videos help admin understand the problem faster</span>
+                </div>
+            </div>
+
+            <input type="file" id="f_media" name="media[]" 
+                   accept="image/jpeg,image/png,image/gif,video/mp4"
+                   multiple style="display:none"
+                   onchange="onFileSelect(this)">
+
+            <div class="size-error" id="sizeError">
+                <i class="fa fa-times-circle"></i>
+                <span id="sizeErrorText"></span>
+            </div>
+
+            <div class="preview-grid" id="previewGrid"></div>
+
+            <div class="file-summary" id="fileSummary">
+                <i class="fa fa-check-circle" style="color:#10b981"></i>
+                <span id="fileSummaryText"></span>
+            </div>
+        </div>
+
+        <!-- ===== SECTION 4: DECLARATION & SUBMIT ===== -->
+        <div class="section-card">
+            <div class="section-title">
+                <i class="fa fa-paper-plane"></i>
+                Submit Your Complaint
+            </div>
+
+            <div class="declaration-box">
+                <label class="declaration-label">
+                    <input type="checkbox" id="f_declaration">
+                    <span>
+                        I confirm this is a genuine complaint and all information
+                        provided is accurate. I understand that filing false complaints
+                        may result in disciplinary action.
+                    </span>
+                </label>
+            </div>
+
+            <div class="terms-note">
+                <i class="fa fa-shield-alt"></i>
+                Your complaint is protected under the Campus Student Rights Policy.
+                Average response time: <strong>2–4 hours</strong> for regular complaints,
+                <strong>under 30 minutes</strong> for emergencies.
+            </div>
+
+            <div class="submit-wrap">
+                <button type="submit" class="btn-submit">
+                    <i class="fa fa-paper-plane"></i> Submit Complaint
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+    
+</div>
+
+<div class="form-footer">
+    <span>&copy; 2026 Campus Problem Reporter</span>
+    <span>Need help? <a href="/frontend/student/student-dashboard.html">Contact Admin</a></span>
+</div>
+
+</div>
+</div>
+</form>
+<script src="http://localhost/CAMPUS-PROBLEM-REPORTER/frontend/student/complaint_form.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard — Campus Problem Reporter</title>
+    <link rel="stylesheet" href="admin-dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<div class="header">
+    
+    <h2><i class="fa fa-shield-alt"></i> Campus Problem Reporter : Admin</h2>
+    <div class="search-box">
+        <input type="text" id="globalSearch" placeholder="Search complaint ID, student, category...">
+        <button onclick="handleSearch()">Search</button>
+    </div>
+    
+</div>
+
+
+<!-- ===== HERO ===== -->
+<div class="hero" id="dashboard">
+    <h1><i class="fa fa-tachometer-alt"></i> Admin Control Center</h1>
+    <p>Monitor campus incidents, assign helpers, manage departments and ensure quick resolution of all complaints.</p>
+</div>
+
+<!-- ===== QUICK ACTIONS ===== -->
+<div class="actions">
+    <div class="action-btn" onclick="scrollToSection('complaints')">
+        <a href="http://localhost/CAMPUS-PROBLEM-REPORTER/frontend/admin/contact.php" class="red">Student Messages</a>
+    </div>
+    <div class="action-btn" onclick="openModal('addHelperModal')">
+        <a href="http://localhost/CAMPUS-PROBLEM-REPORTER/frontend/admin/addadmin.html" class="red">Add Admin</a>
+    </div>
+    <div class="action-btn" onclick="openModal('assignModal')">
+        <a href="http://localhost/CAMPUS-PROBLEM-REPORTER/frontend/admin/helpers.html" class="red">Assign Helper</a>
+    </div>
+    <div class="action-btn" onclick="openModal('addHelperModal')">
+        <a href="http://localhost/CAMPUS-PROBLEM-REPORTER/frontend/admin/addstudent.html" class="red">Add Students</a>
+    </div>
+    <div class="action-btn" onclick="openModal('addHelperModal')">
+        <a href="http://localhost/CAMPUS-PROBLEM-REPORTER/frontend/admin/feedback.php" class="red">Feedback and Suggestion</a>
+    </div>
+    <div class="action-btn" onclick="openModal('addHelperModal')">
+        <a href="http://localhost/CAMPUS-PROBLEM-REPORTER/frontend/admin/department_dashboard.php" class="red">Department Wise Complaints</a>
+    </div>
+    <div class="action-btn" onclick="openModal('addHelperModal')">
+        <a href="http://localhost/CAMPUS-PROBLEM-REPORTER/frontend/admin/admin.php" class="red">Complaints</a>
+    </div>
+
+    
+</div>
+
+
+
+
+<!-- ===== MAIN CONTENT ===== -->
+<main class="main-content">
+
+<!-- ===== HERO BANNER ===== -->
+<div class="hero-banner">
+    <img src="https://images.unsplash.com/photo-1559027615-cd4628902d4a" alt="">
+    <div class="hero-overlay">
+        <h1>Campus Incident Management System</h1>
+        <p>Manage complaints, monitor campus activities and ensure smooth operations</p>
+    </div>
+</div>
+
+<!-- ===== ACTION GRID (BIG CARDS) ===== -->
+<div class="dashboard-grid">
+
+    <a href="http://localhost/CAMPUS-PROBLEM-REPORTER/frontend/admin/admin.php" class="dash-card">
+        <img src="https://img.icons8.com/fluency/96/task.png">
+        <h3>Manage Complaints</h3>
+        <p>View, resolve and track all complaints</p>
+    </a>
+
+    <a href="http://localhost/CAMPUS-PROBLEM-REPORTER/frontend/admin/contact.php" class="dash-card">
+        <img src="https://img.icons8.com/fluency/96/email.png">
+        <h3>Student Messages</h3>
+        <p>Check all incoming student queries</p>
+    </a>
+
+    <a href="http://localhost/CAMPUS-PROBLEM-REPORTER/frontend/admin/helpers.html" class="dash-card">
+        <img src="https://img.icons8.com/fluency/96/user-group-man-man.png">
+        <h3>Assign Helper</h3>
+        <p>Assign helpers to complaints</p>
+    </a>
+
+    <a href="http://localhost/CAMPUS-PROBLEM-REPORTER/frontend/admin/addadmin.html" class="dash-card">
+        <img src="https://img.icons8.com/fluency/96/admin-settings-male.png">
+        <h3>Add Admin</h3>
+        <p>Create new admin accounts</p>
+    </a>
+
+    <a href="http://localhost/CAMPUS-PROBLEM-REPORTER/frontend/admin/addstudent.html" class="dash-card">
+        <img src="https://img.icons8.com/fluency/96/add-user-male.png">
+        <h3>Add Student</h3>
+        <p>Register new students</p>
+    </a>
+
+    <a href="http://localhost/CAMPUS-PROBLEM-REPORTER/frontend/admin/department_dashboard.php" class="dash-card">
+        <img src="https://img.icons8.com/fluency/96/department.png">
+        <h3>Departments</h3>
+        <p>Monitor department-wise complaints</p>
+    </a>
+
+    <a href="http://localhost/CAMPUS-PROBLEM-REPORTER/frontend/admin/feedback.php" class="dash-card">
+        <img src="https://img.icons8.com/fluency/96/feedback.png">
+        <h3>Feedback</h3>
+        <p>View suggestions and feedback</p>
+    </a>
+
+        <a href="http://localhost/CAMPUS-PROBLEM-REPORTER/frontend/admin/department.html" class="dash-card">
+        <img src="https://img.icons8.com/fluency/96/feedback.png">
+        <h3>Departments (Upcoming)</h3>
+        <p>Add And Manage Departments</p>
+        
+        <a href="http://localhost/CAMPUS-PROBLEM-REPORTER/frontend/admin/department.html" class="dash-card">
+        <img src="https://img.icons8.com/fluency/96/feedback.png">
+        <h3>Fetching Student Data (Upcoming)</h3>
+        <p>Retrive Student Data </p>
+    </a>
+
+</div>
+
+<!-- ===== INFO SECTION ===== -->
+<div class="info-section">
+
+    <div class="info-card">
+        <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d">
+        <div>
+            <h3>Smart Campus Monitoring</h3>
+            <p>Track real-time campus issues and improve student experience through faster resolutions.</p>
+        </div>
+    </div>
+
+    <div class="info-card">
+        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c">
+        <div>
+            <h3>Efficient Team Coordination</h3>
+            <p>Assign helpers and manage departments efficiently with structured workflows.</p>
+        </div>
+    </div>
+
+</div>
+
+<!-- ===== BANNER STRIP ===== -->
+<div class="highlight-strip">
+    <h2>🚀 Improving Campus Life Through Technology</h2>
+</div>
+
+</main>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+    <div class="footer-container">
+        <div class="footer-section">
+            <h3>About Admin Module</h3>
+            <p>Administrative panel for authorized personnel to monitor reports, enforce service standards, and maintain campus operational transparency.</p>
+        </div>
+        <div class="footer-section">
+            <h3>System Information</h3>
+            <ul>
+                <li>Version: 1.0.0</li>
+                <li>Last Updated: Mar 2026</li>
+                <li id="serverStatus">Server Status: Checking...</li>
+                <li>Database: Connected</li>
+                <li id="responseTime">Response Time: --ms</li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h3>Admin Policies</h3>
+            <ul>
+                <a href="http://localhost/CAMPUS-PROBLEM-REPORTER/frontend/admin/etc.html" style="color: white; text-decoration: none;"><li>Data Privacy Policy</li></a>
+                <a href="http://localhost/CAMPUS-PROBLEM-REPORTER/frontend/admin/etc.html" style="color: white; text-decoration: none;"><li>User Access Guidelines</li></a>
+                <a href="http://localhost/CAMPUS-PROBLEM-REPORTER/frontend/admin/etc.html" style="color: white; text-decoration: none;"><li>Incident Escalation Rules</li></a>
+                <a href="http://localhost/CAMPUS-PROBLEM-REPORTER/frontend/admin/etc.html" style="color: white; text-decoration: none;"><li>System Usage Terms</li></a>
+                <a href="http://localhost/CAMPUS-PROBLEM-REPORTER/frontend/admin/etc.html" style="color: white; text-decoration: none;"><li>Security Compliance</li></a>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h3>Technical Support</h3>
+            <p>Report system bugs or technical issues.</p>
+            <div class="subscribe-box">
+                <input type="text" id="bugReport" placeholder="Describe issue briefly">
+                <button onclick="submitBugReport()">Submit</button>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        &copy; 2026 Campus Incident Management System | All Administrative Rights Reserved
+    </div>
+</footer>
+
+<script src="admin-dashboard.js"></script>
+</body>
+</html>

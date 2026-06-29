@@ -1,0 +1,127 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI', sans-serif;
+}
+
+body{
+    height:100vh;
+    background-image: url('https://imgs.search.brave.com/1wT_P6sA9pmHQu9RBOD2nPjdYcSY1BeQTnW21DSBiMw/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5nZXR0eWltYWdl/cy5jb20vaWQvMjAx/Nzg3MTQ1Ni92ZWN0/b3IvYWJzdHJhY3Qt/b3ZlcmxhcC1kYXJr/LWJsdWUtYmFja2dy/b3VuZC13aXRoLWJs/YW5rLXNwYWNlLWRl/c2lnbi5qcGc_cz02/MTJ4NjEyJnc9MCZr/PTIwJmM9SjRPQ2NE/bnBHOGVoTmtQRG5U/NG5jQ3hJeHNBbUlm/NGtiZnhmWXpNNDJL/OD0');
+    background-size:cover;
+    background-position:center;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+body::before{
+    content:"";
+    position:absolute;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.65);
+}
+
+.main-container{
+    position:relative;
+    z-index:2;
+}
+
+.login-card{
+    display:flex;
+    width:750px;
+    background:white;
+    border-radius:10px;
+    overflow:hidden;
+    box-shadow:0 10px 30px rgba(0,0,0,0.3);
+}
+
+/* Left Section */
+.image-section{
+    width:45%;
+    background:#1e3c72;
+    color:white;
+    padding:40px 25px;
+    text-align:center;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+}
+
+.image-section img{
+    width:80px;
+    margin:0 auto 15px auto;
+}
+
+/* Form Section */
+.form-section{
+    width:55%;
+    padding:35px;
+}
+
+.form-section h3{
+    margin-bottom:20px;
+    color:#222;
+}
+
+.form-group{
+    margin-bottom:15px;
+}
+
+.form-group input{
+    width:100%;
+    padding:10px;
+    border:1px solid #ccc;
+    border-radius:6px;
+    outline:none;
+}
+
+.form-group input:focus{
+    border-color:#333;
+}
+
+.form-options{
+    text-align:right;
+    margin-bottom:20px;
+}
+
+.form-options a{
+    font-size:13px;
+    color:#333;
+    text-decoration:none;
+}
+
+.login-btn{
+    width:100%;
+    padding:11px;
+    background:#1e3c72;
+    color:white;
+    border:none;
+    border-radius:6px;
+    cursor:pointer;
+}
+
+.login-btn:hover{
+    background:#333;
+}
+
+.back-link{
+    display:block;
+    text-align:center;
+    margin-top:15px;
+    font-size:13px;
+    color:#555;
+    text-decoration:none;
+}
+
+@media(max-width:800px){
+    .login-card{
+        flex-direction:column;
+        width:90%;
+    }
+
+    .image-section,.form-section{
+        width:100%;
+    }
+}
